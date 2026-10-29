@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CocoaSuite</title>
+<meta name="description" content="CocoaSuite: browser apps for design, music and video. No account, no uploads.">
+<meta name="theme-color" content="#14100D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cpath%20d%3D%22M48%2010C43.5%205.9%2038.5%204%2032%204C16.5%204%204%2016.5%204%2032C4%2047.5%2016.5%2060%2032%2060C38.5%2060%2043.5%2058.1%2048%2054L40%2044C37.8%2046%2035.3%2047%2032%2047C23.7%2047%2017%2040.3%2017%2032C17%2023.7%2023.7%2017%2032%2017C35.3%2017%2037.8%2018%2040%2020L48%2010Z%22%20fill%3D%22%23693E2C%22%2F%3E%3Cpath%20d%3D%22M28%2023C28%2021.5%2029.6%2020.6%2030.9%2021.4L45.5%2030.4C46.8%2031.2%2046.8%2033.1%2045.5%2033.9L30.9%2042.8C29.6%2043.6%2028%2042.7%2028%2041.2V23Z%22%20fill%3D%22%23E8A15C%22%2F%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--night:#14100D;--paper:#F4EEE6;--cream:#F6F1EB;--ink:#1E1612;--cocoa:#693E2C;--caramel:#E8A15C;--mute:#9C8F84;--mute2:#6E6259;--line:#2b2522;--cv:#3d6a9e;--ct:#a8703e;--ca:#3c8a66;--disp:'Unbounded',system-ui,sans-serif;--sans:'Manrope',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;--pad:clamp(16px,5vw,72px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);color:var(--cream);font:17px/1.55 var(--sans);overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1320px;margin:0 auto;padding:0 var(--pad)}
+.mono{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em}
+.disp{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;margin:0}
+.muted{color:var(--mute)}
+.top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-top:22px;padding-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand span{font:700 22px var(--disp);letter-spacing:-.03em}
+.brand em{font-style:normal;color:var(--caramel)}
+nav{display:flex;align-items:center;gap:26px;font-size:15px;flex-wrap:wrap}
+nav a{text-decoration:none;color:var(--mute)}
+nav a:hover{color:var(--cream)}
+.hero{padding-top:clamp(40px,9vh,110px)}
+h1{font:700 clamp(40px,7.4vw,112px)/.98 var(--disp);letter-spacing:-.035em;margin:0;max-width:11.5ch}
+h1 em{font-style:normal;color:var(--caramel)}
+.lede{display:grid;grid-template-columns:minmax(0,34rem) auto;gap:40px 64px;align-items:end;margin-top:44px}
+.lede p{margin:0;color:#CFC3B8;font-size:clamp(17px,1.5vw,19px)}
+.lede b{color:var(--cream)}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:700 16px var(--sans);padding:16px 22px;border-radius:12px}
+.btn.pri{background:var(--cream);color:var(--ink)}
+.btn.sec{border:1.5px solid #3a302a;color:var(--cream)}
+.cta{display:flex;flex-wrap:wrap;gap:12px 14px}
+.tiles{margin-top:clamp(56px,9vh,96px);display:flex;flex-direction:column;gap:20px}
+.crown{border-radius:22px;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;gap:18px;text-decoration:none;min-height:420px;justify-content:space-between;background:var(--ca);color:var(--cream)}
+.crown .disp{font-size:clamp(40px,5.6vw,80px);line-height:1}
+.crown p,.tile p{margin:0;line-height:1.5}
+.crown p{font-size:clamp(17px,1.6vw,21px);max-width:34rem}
+.row2{display:flex;gap:20px;flex-wrap:wrap}
+.tile{flex:1 1 280px;min-width:0;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;text-decoration:none;min-height:300px}
+.tile .disp{font-size:26px}
+.tile p{font-size:16px}
+.tile .go,.crown .go{margin-top:auto;font:500 13px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.tile.cv{background:var(--cv)}
+.tile.ct{background:var(--ct)}
+.paper{background:var(--paper);color:var(--ink);margin-top:clamp(90px,14vh,160px)}
+.apps{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;padding-top:clamp(72px,11vh,130px);padding-bottom:clamp(72px,11vh,130px)}
+.apps .eyebrow{display:block;color:var(--cocoa);margin-bottom:22px;text-transform:uppercase;letter-spacing:.1em}
+.apps h2{font-size:clamp(30px,3.9vw,56px);line-height:1.02}
+ol{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
+li{display:grid;grid-template-columns:1fr auto;gap:6px 18px;align-items:baseline;padding:20px 0;border-bottom:1px solid #D6CABB}
+li .disp{font-size:20px;display:block}
+li span.d{color:#5A4A3F}
+li a{color:var(--cocoa);text-decoration:none;white-space:nowrap}
+.ledger-wrap{padding-top:clamp(80px,12vh,140px);padding-bottom:clamp(40px,6vh,70px)}
+.ledger-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:46px;flex-wrap:wrap}
+.ledger-head h2{font-size:clamp(30px,3.9vw,56px);line-height:1.02}
+.ledger{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;border-top:1px solid var(--line)}
+.item{display:grid;grid-template-columns:52px 1fr;gap:4px 16px;padding:26px 0 28px;border-bottom:1px solid var(--line)}
+.item .tag{grid-row:span 2;color:var(--night);border-radius:5px;height:22px;display:grid;place-items:center;margin-top:3px;font:500 11px var(--mono)}
+.item h3{margin:0;font:700 19px var(--sans)}
+.item p{margin:0;color:var(--mute);font-size:15.5px}
+.promise{padding-top:clamp(70px,10vh,120px);padding-bottom:clamp(70px,10vh,120px)}
+.promise h2{font-size:clamp(34px,5.6vw,84px);line-height:1.02;max-width:16ch}
+.promise h2 span{color:var(--mute2)}
+.facts{display:flex;flex-wrap:wrap;gap:10px 34px;margin-top:34px;color:var(--mute)}
+.end{border-top:1px solid var(--line);padding-top:60px;padding-bottom:40px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:40px}
+.end h2{font-size:clamp(28px,3.4vw,46px);line-height:1.02}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:26px;padding-bottom:34px;color:var(--mute2);border-top:1px solid var(--line);margin-top:40px}
+.foot a{color:var(--mute);text-decoration:none}
+.foot a:hover{color:var(--cream)}
+@media (max-width:900px){.lede{grid-template-columns:1fr}.apps{grid-template-columns:1fr;gap:40px}.ledger{grid-template-columns:1fr}nav .hide-s{display:none}}
+@media (max-width:620px){.btn{width:100%;justify-content:center}li{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="wrap top">
+  <a class="brand" href="./" aria-label="CocoaSuite">
+    <svg width="40" height="40" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M48 10C43.5 5.9 38.5 4 32 4C16.5 4 4 16.5 4 32C4 47.5 16.5 60 32 60C38.5 60 43.5 58.1 48 54L40 44C37.8 46 35.3 47 32 47C23.7 47 17 40.3 17 32C17 23.7 23.7 17 32 17C35.3 17 37.8 18 40 20L48 10Z" fill="#693E2C"/><path d="M28 23C28 21.5 29.6 20.6 30.9 21.4L45.5 30.4C46.8 31.2 46.8 33.1 45.5 33.9L30.9 42.8C29.6 43.6 28 42.7 28 41.2V23Z" fill="#E8A15C"/></svg>
+    <span>Cocoa<em>Suite</em></span>
+  </a>
+  <nav>
+    <a href="https://cocoasuite.github.io/cocoacut/">Cut</a>
+    <a href="https://cocoasuite.github.io/cocoacanvas/">Canvas</a>
+    <a href="https://cocoasuite.github.io/cocoatune/">Tune</a>
+  </nav>
+</div>
+
+<main>
+  <section class="wrap hero">
+    <h1>Make it. Cut it. <em>Play it.</em></h1>
+    <div class="lede">
+      <p>Design a poster, trim a video, play your own music. Each app runs in the browser, with the same look and no account. Everything stays on your computer: <b>no uploads, no sign-up.</b></p>
+      <div class="cta">
+        <a class="btn pri" href="https://cocoasuite.github.io/cocoacut/">Open Cut</a>
+        <a class="btn sec" href="#apps">See the apps</a>
+      </div>
+    </div>
+
+    <div class="tiles">
+      <a class="crown" href="https://cocoasuite.github.io/cocoacut/">
+        <span class="mono" style="opacity:.85">Video · Flagship</span>
+        <div class="disp">Cocoa Cut</div>
+        <p>A video editor in the browser. Say the change, see it, export a file.</p>
+        <svg viewBox="0 0 900 150" width="100%" role="img" aria-hidden="true" style="display:block">
+          <rect x="0" y="10" width="900" height="26" rx="4" fill="#2e6d51"/>
+          <g font-family="JetBrains Mono, monospace" font-size="11" fill="#F6F1EB" opacity=".7"><text x="8" y="28">00:00</text><text x="150" y="28">00:05</text><text x="300" y="28">00:10</text><text x="450" y="28">00:15</text><text x="600" y="28">00:20</text><text x="750" y="28">00:25</text></g>
+          <rect x="0" y="50" width="250" height="36" rx="6" fill="#F6F1EB" opacity=".9"/>
+          <rect x="256" y="50" width="330" height="36" rx="6" fill="#F6F1EB" opacity=".6"/>
+          <rect x="592" y="50" width="308" height="36" rx="6" fill="#F6F1EB" opacity=".9"/>
+          <rect x="0" y="94" width="120" height="36" rx="6" fill="#E8A15C"/>
+          <rect x="126" y="94" width="260" height="36" rx="6" fill="#E8A15C" opacity=".75"/>
+          <rect x="392" y="94" width="508" height="36" rx="6" fill="#E8A15C" opacity=".9"/>
+          <rect x="324" y="0" width="2.5" height="150" fill="#14100D"/>
+        </svg>
+        <span class="go">Open landing →</span>
+      </a>
+
+      <div class="row2">
+        <a class="tile cv" href="https://cocoasuite.github.io/cocoacanvas/">
+          <span class="mono" style="opacity:.8">Design</span>
+          <div class="disp">Cocoa Canvas</div>
+          <p>A standalone design tool for interfaces, posters and layouts, built in HTML.</p>
+          <svg viewBox="0 0 260 130" width="100%" role="img" aria-hidden="true" style="display:block">
+            <g stroke="#F6F1EB" stroke-opacity=".18" stroke-width=".8">
+              <line x1="0" y1="26" x2="260" y2="26"/><line x1="0" y1="52" x2="260" y2="52"/><line x1="0" y1="78" x2="260" y2="78"/><line x1="0" y1="104" x2="260" y2="104"/>
+              <line x1="52" y1="0" x2="52" y2="130"/><line x1="104" y1="0" x2="104" y2="130"/><line x1="156" y1="0" x2="156" y2="130"/><line x1="208" y1="0" x2="208" y2="130"/>
+            </g>
+            <polygon points="50,40 150,22 200,96 80,116" fill="#F6F1EB" fill-opacity=".2" stroke="#F6F1EB" stroke-width="2"/>
+            <g fill="#E8A15C"><circle cx="50" cy="40" r="4.5"/><circle cx="150" cy="22" r="4.5"/><circle cx="200" cy="96" r="4.5"/><circle cx="80" cy="116" r="4.5"/></g>
+          </svg>
+          <span class="go">Open landing →</span>
+        </a>
+        <a class="tile ct" href="https://cocoasuite.github.io/cocoatune/">
+          <span class="mono" style="opacity:.8">Music</span>
+          <div class="disp">Cocoa Tune</div>
+          <p>A music player for local files, plus tracks saved from web links.</p>
+          <svg viewBox="0 0 260 130" width="100%" role="img" aria-hidden="true" style="display:block">
+            <g fill="#F6F1EB" opacity=".9">
+              <rect x="4" y="80" width="10" height="44" rx="2"/><rect x="20" y="52" width="10" height="72" rx="2"/><rect x="36" y="66" width="10" height="58" rx="2"/><rect x="52" y="30" width="10" height="94" rx="2"/>
+              <rect x="68" y="60" width="10" height="64" rx="2"/><rect x="84" y="14" width="10" height="110" rx="2"/><rect x="100" y="70" width="10" height="54" rx="2"/><rect x="116" y="40" width="10" height="84" rx="2"/>
+              <rect x="132" y="56" width="10" height="68" rx="2"/><rect x="148" y="24" width="10" height="100" rx="2"/><rect x="164" y="74" width="10" height="50" rx="2"/><rect x="180" y="46" width="10" height="78" rx="2"/>
+              <rect x="196" y="64" width="10" height="60" rx="2"/><rect x="212" y="36" width="10" height="88" rx="2"/><rect x="228" y="82" width="10" height="42" rx="2"/><rect x="244" y="58" width="10" height="66" rx="2"/>
+            </g>
+          </svg>
+          <span class="go">Open landing →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="apps" class="paper">
+    <div class="wrap apps">
+      <div>
+        <span class="eyebrow mono">The apps</span>
+        <h2 class="disp">Pick a tool. The look stays the same.</h2>
+      </div>
+      <ol>
+        <li><span><span class="disp">Cocoa Cut</span><span class="d">A video editor in the browser. Say the change, see it, export a file.</span></span><a class="mono" href="https://cocoasuite.github.io/cocoacut/">→ Landing</a></li>
+        <li><span><span class="disp">Cocoa Canvas</span><span class="d">A standalone design tool for interfaces, posters and layouts, built in HTML.</span></span><a class="mono" href="https://cocoasuite.github.io/cocoacanvas/">→ Landing</a></li>
+        <li><span><span class="disp">Cocoa Tune</span><span class="d">A music player for local files, plus saved links from the web.</span></span><a class="mono" href="https://cocoasuite.github.io/cocoatune/">→ Landing</a></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap ledger-wrap">
+    <div class="ledger-head">
+      <h2 class="disp">What’s in the suite</h2>
+      <p class="muted" style="margin:0;max-width:24rem">The same habits across every app, so switching between them takes no relearning.</p>
+    </div>
+    <div class="ledger">
+      <div class="item"><span class="tag" style="background:var(--ca)">CT</span><h3>Cut without the menus</h3><p>Trim, caption and export a video from one window, with no render queue.</p></div>
+      <div class="item"><span class="tag" style="background:var(--cv)">CV</span><h3>Browser-first</h3><p>Open a tool in a tab. Nothing to install, and the same look everywhere.</p></div>
+      <div class="item"><span class="tag" style="background:var(--ct)">TU</span><h3>Your music, your links</h3><p>Play local files, or save tracks from web links through the Tune backend.</p></div>
+      <div class="item"><span class="tag" style="background:var(--caramel)">EN</span><h3>English and Russian</h3><p>Every landing and app page reads in both languages.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap promise">
+    <h2 class="disp">Your files stay on your computer. <span>Not even to us.</span></h2>
+    <div class="facts mono"><span>No sign-up</span><span>Works offline</span><span>No cloud render</span><span>English &amp; Russian</span></div>
+  </section>
+
+  <section class="wrap">
+    <div class="end">
+      <h2 class="disp">Pick a tool and start.</h2>
+      <div class="cta">
+        <a class="btn pri" href="https://cocoasuite.github.io/cocoacut/">Open Cut</a>
+        <a class="btn sec" href="https://cocoasuite.github.io/cocoacanvas/">Open Canvas</a>
+      </div>
+    </div>
+    <footer class="foot mono">
+      <span>CocoaSuite · Cut · Canvas · Tune</span>
+      <a href="https://github.com/CocoaSuite">github.com/CocoaSuite</a>
+    </footer>
+  </section>
+</main>
+
+</body>
+</html>
