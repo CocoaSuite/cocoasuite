@@ -2,263 +2,181 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CocoaSuite</title>
-<meta name="description" content="CocoaSuite: browser apps for design, music and video. No account, no uploads.">
-<meta name="theme-color" content="#14100D">
+<meta name="description" content="Video, design, music and writing apps that open in your browser.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%222%202%2050%2060%22%3E%3Cpath%20d%3D%22M48%2010C43.5%205.9%2038.5%204%2032%204C16.5%204%204%2016.5%204%2032C4%2047.5%2016.5%2060%2032%2060C38.5%2060%2043.5%2058.1%2048%2054L40%2044C37.8%2046%2035.3%2047%2032%2047C23.7%2047%2017%2040.3%2017%2032C17%2023.7%2023.7%2017%2032%2017C35.3%2017%2037.8%2018%2040%2020L48%2010Z%22%20fill%3D%22%23D6AE92%22/%3E%3Cpath%20d%3D%22M35.9078%2021.8647C35.5915%2020.707%2034.4481%2019.9361%2033.2966%2020.2742C29.9721%2021.2501%2028.0335%2024.6978%2028.7846%2028.4442C28.9839%2029.4382%2029.8527%2030.1689%2030.8663%2030.151C34.6148%2030.0849%2037.3066%2026.9856%2035.9078%2021.8647Z%22%20fill%3D%22%23D6AE92%22/%3E%3Cpath%20d%3D%22M42.3766%2031.6824C42.4007%2030.6345%2041.6618%2029.7182%2040.6333%2029.5161C36.9771%2028.7978%2034.1123%2030.8544%2033.4136%2034.3112C33.2049%2035.3441%2033.7899%2036.3748%2034.7798%2036.7362C38.7251%2038.1765%2042.2779%2035.9817%2042.3766%2031.6824Z%22%20fill%3D%22%23D6AE92%22/%3E%3Cpath%20d%3D%22M29.0575%2034.3802C28.5474%2034.1002%2027.938%2034.04%2027.3905%2034.2371C23.6577%2035.581%2023.5403%2040.1873%2027.0382%2043.1371C27.7549%2043.7415%2028.7881%2043.8329%2029.5667%2043.3105C32.9728%2041.0253%2032.8031%2036.4358%2029.0575%2034.3802Z%22%20fill%3D%22%23D6AE92%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--night:#14100D;--paper:#F4EEE6;--cream:#F6F1EB;--ink:#1E1612;--cocoa:#693E2C;--caramel:#E8A15C;--mute:#9C8F84;--mute2:#6E6259;--line:#2b2522;--cv:#3d6a9e;--ct:#a8703e;--ca:#3c8a66;--au:#7d4f6c;--disp:'Unbounded',system-ui,sans-serif;--sans:'Manrope',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;--pad:clamp(16px,5vw,72px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--night);color:var(--cream);font:17px/1.55 var(--sans);overflow-x:hidden}
-a{color:inherit}
-.wrap{max-width:1320px;margin:0 auto;padding:0 var(--pad)}
-.mono{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em}
-.disp{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;margin:0}
-.muted{color:var(--mute)}
-.top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-top:22px;padding-bottom:22px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand span{font:700 22px var(--disp);letter-spacing:-.03em}
-.brand em{font-style:normal;color:var(--caramel)}
-nav{display:flex;align-items:center;gap:26px;font-size:15px;flex-wrap:wrap}
-nav a{text-decoration:none;color:var(--mute)}
-nav a:hover{color:var(--cream)}
-.hero{padding-top:clamp(40px,9vh,110px)}
-h1{font:700 clamp(40px,7.4vw,112px)/.98 var(--disp);letter-spacing:-.035em;margin:0;max-width:11.5ch}
-h1 em{font-style:normal;color:var(--caramel)}
-.lede{display:grid;grid-template-columns:minmax(0,34rem) auto;gap:40px 64px;align-items:end;margin-top:44px}
-.lede p{margin:0;color:#CFC3B8;font-size:clamp(17px,1.5vw,19px)}
-.lede b{color:var(--cream)}
-.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:700 16px var(--sans);padding:16px 22px;border-radius:12px}
-.btn.pri{background:var(--cream);color:var(--ink)}
-.btn.sec{border:1.5px solid #3a302a;color:var(--cream)}
-.cta{display:flex;flex-wrap:wrap;gap:12px 14px}
-.tiles{margin-top:clamp(56px,9vh,96px);display:flex;flex-direction:column;gap:20px}
-.crown{border-radius:22px;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;gap:18px;text-decoration:none;min-height:420px;justify-content:space-between;background:var(--ca);color:var(--cream)}
-.crown .disp{font-size:clamp(40px,5.6vw,80px);line-height:1}
-.crown p,.tile p{margin:0;line-height:1.5}
-.crown p{font-size:clamp(17px,1.6vw,21px);max-width:34rem}
-.row2{display:flex;gap:20px;flex-wrap:wrap}
-.tile{flex:1 1 280px;min-width:0;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;text-decoration:none;min-height:300px}
-.tile .disp{font-size:26px}
-.tile p{font-size:16px}
-.tile .go,.crown .go{margin-top:auto;font:500 13px var(--mono);letter-spacing:.04em;text-transform:uppercase}
-.tile.cv{background:var(--cv)}
-.tile.ct{background:var(--ct)}
-.tile.au{background:var(--au)}
-.paper{background:var(--paper);color:var(--ink);margin-top:clamp(90px,14vh,160px)}
-.apps{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;padding-top:clamp(72px,11vh,130px);padding-bottom:clamp(72px,11vh,130px)}
-.apps .eyebrow{display:block;color:var(--cocoa);margin-bottom:22px;text-transform:uppercase;letter-spacing:.1em}
-.apps h2{font-size:clamp(30px,3.9vw,56px);line-height:1.02}
-ol{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
-li{display:grid;grid-template-columns:1fr auto;gap:6px 18px;align-items:baseline;padding:20px 0;border-bottom:1px solid #D6CABB}
-li .disp{font-size:20px;display:block}
-li span.d{color:#5A4A3F}
-li a{color:var(--cocoa);text-decoration:none;white-space:nowrap}
-.ledger-wrap{padding-top:clamp(80px,12vh,140px);padding-bottom:clamp(40px,6vh,70px)}
-.ledger-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:46px;flex-wrap:wrap}
-.ledger-head h2{font-size:clamp(30px,3.9vw,56px);line-height:1.02}
-.ledger{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;border-top:1px solid var(--line)}
-.item{display:grid;grid-template-columns:52px 1fr;gap:4px 16px;padding:26px 0 28px;border-bottom:1px solid var(--line)}
-.item .tag{grid-row:span 2;color:var(--night);border-radius:5px;height:22px;display:grid;place-items:center;margin-top:3px;font:500 11px var(--mono)}
-.item h3{margin:0;font:700 19px var(--sans)}
-.item p{margin:0;color:var(--mute);font-size:15.5px}
-.promise{padding-top:clamp(70px,10vh,120px);padding-bottom:clamp(70px,10vh,120px)}
-.promise h2{font-size:clamp(34px,5.6vw,84px);line-height:1.02;max-width:16ch}
-.promise h2 span{color:var(--mute2)}
-.facts{display:flex;flex-wrap:wrap;gap:10px 34px;margin-top:34px;color:var(--mute)}
-.end{border-top:1px solid var(--line);padding-top:60px;padding-bottom:40px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:40px}
-.end h2{font-size:clamp(28px,3.4vw,46px);line-height:1.02}
-.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:26px;padding-bottom:34px;color:var(--mute2);border-top:1px solid var(--line);margin-top:40px}
-.foot a{color:var(--mute);text-decoration:none}
-.foot a:hover{color:var(--cream)}
-.eq rect{transform-box:fill-box;transform-origin:50% 100%;animation:eq 1s ease-in-out infinite alternate}
-.eq rect:nth-child(4n+1){animation-duration:.8s;animation-delay:-.3s}
-.eq rect:nth-child(4n+2){animation-duration:1.25s;animation-delay:-.7s}
-.eq rect:nth-child(4n+3){animation-duration:.95s;animation-delay:-.1s}
-.eq rect:nth-child(4n){animation-duration:1.4s;animation-delay:-.5s}
-.eq rect:nth-child(3n){animation-delay:-.9s}
-@keyframes eq{0%{transform:scaleY(.3)}100%{transform:scaleY(1)}}
-@media (prefers-reduced-motion:reduce){.eq rect{animation:none}}
-@media (max-width:900px){.lede{grid-template-columns:1fr}.apps{grid-template-columns:1fr;gap:40px}.ledger{grid-template-columns:1fr}nav .hide-s{display:none}}
-@media (max-width:620px){.btn{width:100%;justify-content:center}li{grid-template-columns:1fr}}
+body{margin:0;background:#121213;color:#F2F2F2;font-family:Inter,system-ui,sans-serif}
+a{color:#F2F2F2}a:hover{color:#FFFFFF}
+.sb:hover{background:#2A2A2C!important}
+.ac:hover{border-color:#4A4A4D!important}
+@media (max-width:1000px){.lay{flex-direction:column!important}.side{width:auto!important;flex-direction:row!important;flex-wrap:wrap}.ft{grid-template-columns:minmax(0,1fr)!important}.g4{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:620px){.g4{grid-template-columns:minmax(0,1fr)!important}}
+
+@keyframes ph{from{left:0}to{left:calc(100% - 2px)}}
+@keyframes eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+@keyframes pulse{0%,100%{r:4}50%{r:6}}
+@keyframes ants{to{stroke-dashoffset:-14}}
+@keyframes type{0%{width:0}70%,100%{width:76%}}
+@keyframes blink{50%{opacity:0}}
+@keyframes prog{from{width:0}to{width:100%}}
+.ph{position:absolute;top:-8px;bottom:-8px;width:2px;background:#F6F1EB;animation:ph 8s linear infinite}
+.eq{transform-origin:bottom;animation:eq 1.3s ease-in-out infinite}
+.hd{animation:pulse 2.4s ease-in-out infinite}
+.ants{animation:ants .8s linear infinite}
+.ty{animation:type 4.5s steps(30) infinite}
+.cr{animation:blink 1s step-end infinite}
+.pr{animation:prog 20s linear infinite}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:14px 24px;border-bottom:1px solid #262628;background:#19191A}
+.top .brand svg{display:block;height:28px;width:auto}
+.search{display:flex;align-items:center;gap:10px;flex:0 1 420px;min-height:40px;padding:0 14px;border-radius:8px;background:#232325;border:1px solid #2E2E31}
+.search input{flex:1;min-width:0;background:transparent;border:0;outline:none;color:#F2F2F2;font:400 14px Inter,sans-serif}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.gh{font-size:14px;color:#C8C8CC;text-decoration:none}
+.lay{display:flex;min-height:calc(100vh - 69px)}
+.side{width:232px;flex:none;display:flex;flex-direction:column;gap:4px;padding:20px 14px;border-right:1px solid #262628}
+.side .lbl{font-size:12px;font-weight:600;color:#8E8E93;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px}
+.sb{text-align:left;min-height:44px;padding:0 12px;border-radius:8px;border:0;cursor:pointer;font:500 15px Inter,sans-serif;color:#F2F2F2;background:transparent}
+.sb.on{background:#2A2A2C}
+main{flex:999 1 560px;min-width:0;padding:28px 36px 64px;display:flex;flex-direction:column;gap:36px}
+.ft{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:36px;align-items:center;padding:28px;border-radius:18px;background:#1A1A1C;border:1px solid #262628}
+.fi{display:flex;flex-direction:column;gap:20px}
+.tile{display:inline-flex;align-items:center;justify-content:center;flex:none}
+.tile img{width:58%;height:58%}
+.cat{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#A3A3A8}
+h1{margin:0;font-size:40px;line-height:1.08;font-weight:700;letter-spacing:-.025em}
+.fi p{margin:0;font-size:16px;line-height:1.6;color:#B5B5BA}
+.btn{display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border-radius:999px;background:#F2F2F2;color:#121213!important;text-decoration:none;font-weight:600;font-size:14px}
+.btn.lg{min-height:46px;padding:0 22px;font-size:15px;align-self:flex-start}
+.ghost{min-height:40px;padding:0 16px;border-radius:999px;background:transparent;border:1px solid #3A3A3D;color:#F2F2F2;font:500 14px Inter,sans-serif;cursor:pointer}
+h2{margin:0;font-size:22px;font-weight:600}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:18px}
+.card{display:flex;flex-direction:column;gap:16px;padding:20px;border-radius:14px;background:#1A1A1C;border:1px solid #262628}
+.card:hover{border-color:#4A4A4D}
+.card.on{border-color:#5A5A5E}
+.card[hidden],.pv[hidden]{display:none}
+.ch{display:flex;align-items:center;gap:14px}
+.ch h3{margin:0;font-size:17px;font-weight:600}
+.sub{font-size:13px;color:#8E8E93}
+.card p{margin:0;font-size:14px;line-height:1.55;color:#B5B5BA;flex-grow:1}
+.acts{display:flex;gap:8px}
+.none{color:#8E8E93;font-size:15px}
 </style>
 </head>
 <body>
-
-<div class="wrap top">
-  <a class="brand" href="./" aria-label="CocoaSuite">
-    <svg viewBox="3 3 240 58" height="40" style="display:block;height:40px;width:auto" role="img" aria-label="CocoaSuite"><path d="M48 10C43.5 5.9 38.5 4 32 4C16.5 4 4 16.5 4 32C4 47.5 16.5 60 32 60C38.5 60 43.5 58.1 48 54L40 44C37.8 46 35.3 47 32 47C23.7 47 17 40.3 17 32C17 23.7 23.7 17 32 17C35.3 17 37.8 18 40 20L48 10Z" fill="#D6AE92"/><path d="M35.9078 21.8647C35.5915 20.707 34.4481 19.9361 33.2966 20.2742C29.9721 21.2501 28.0335 24.6978 28.7846 28.4442C28.9839 29.4382 29.8527 30.1689 30.8663 30.151C34.6148 30.0849 37.3066 26.9856 35.9078 21.8647Z" fill="#D6AE92"/><path d="M42.3766 31.6824C42.4007 30.6345 41.6618 29.7182 40.6333 29.5161C36.9771 28.7978 34.1123 30.8544 33.4136 34.3112C33.2049 35.3441 33.7899 36.3748 34.7798 36.7362C38.7251 38.1765 42.2779 35.9817 42.3766 31.6824Z" fill="#D6AE92"/><path d="M29.0575 34.3802C28.5474 34.1002 27.938 34.04 27.3905 34.2371C23.6577 35.581 23.5403 40.1873 27.0382 43.1371C27.7549 43.7415 28.7881 43.8329 29.5667 43.3105C32.9728 41.0253 32.8031 36.4358 29.0575 34.3802Z" fill="#D6AE92"/><path d="M61.482 46.54C58.89 46.54 56.67 45.976 54.822 44.848C52.974 43.708 51.552 42.124 50.556 40.096C49.572 38.068 49.08 35.716 49.08 33.04C49.08 30.364 49.572 28.012 50.556 25.984C51.552 23.956 52.974 22.378 54.822 21.25C56.67 20.11 58.89 19.54 61.482 19.54C64.47 19.54 66.96 20.29 68.952 21.79C70.944 23.278 72.342 25.288 73.146 27.82L68.772 29.026C68.268 27.334 67.41 26.014 66.198 25.066C64.986 24.106 63.414 23.626 61.482 23.626C59.742 23.626 58.29 24.016 57.126 24.796C55.974 25.576 55.104 26.674 54.516 28.09C53.94 29.494 53.646 31.144 53.634 33.04C53.634 34.936 53.922 36.592 54.498 38.008C55.086 39.412 55.962 40.504 57.126 41.284C58.29 42.064 59.742 42.454 61.482 42.454C63.414 42.454 64.986 41.974 66.198 41.014C67.41 40.054 68.268 38.734 68.772 37.054L73.146 38.26C72.342 40.792 70.944 42.808 68.952 44.308C66.96 45.796 64.47 46.54 61.482 46.54ZM84.6041 46.54C82.6601 46.54 80.9621 46.102 79.5101 45.226C78.0581 44.35 76.9301 43.144 76.1261 41.608C75.3341 40.06 74.9381 38.284 74.9381 36.28C74.9381 34.24 75.3461 32.452 76.1621 30.916C76.9781 29.38 78.1121 28.18 79.5641 27.316C81.0161 26.452 82.6961 26.02 84.6041 26.02C86.5601 26.02 88.2641 26.458 89.7161 27.334C91.1681 28.21 92.2961 29.422 93.1001 30.97C93.9041 32.506 94.3061 34.276 94.3061 36.28C94.3061 38.296 93.8981 40.078 93.0821 41.626C92.2781 43.162 91.1501 44.368 89.6981 45.244C88.2461 46.108 86.5481 46.54 84.6041 46.54ZM84.6041 42.472C86.3321 42.472 87.6161 41.896 88.4561 40.744C89.2961 39.592 89.7161 38.104 89.7161 36.28C89.7161 34.396 89.2901 32.896 88.4381 31.78C87.5861 30.652 86.3081 30.088 84.6041 30.088C83.4401 30.088 82.4801 30.352 81.7241 30.88C80.9801 31.396 80.4281 32.122 80.0681 33.058C79.7081 33.982 79.5281 35.056 79.5281 36.28C79.5281 38.164 79.9541 39.67 80.8061 40.798C81.6701 41.914 82.9361 42.472 84.6041 42.472ZM105.634 46.54C103.63 46.54 101.92 46.096 100.504 45.208C99.088 44.308 98.002 43.084 97.246 41.536C96.502 39.988 96.124 38.236 96.112 36.28C96.124 34.288 96.514 32.524 97.282 30.988C98.062 29.44 99.166 28.228 100.594 27.352C102.022 26.464 103.72 26.02 105.688 26.02C107.896 26.02 109.762 26.578 111.286 27.694C112.822 28.798 113.824 30.31 114.292 32.23L109.972 33.4C109.636 32.356 109.078 31.546 108.298 30.97C107.518 30.382 106.63 30.088 105.634 30.088C104.506 30.088 103.576 30.358 102.844 30.898C102.112 31.426 101.572 32.158 101.224 33.094C100.876 34.03 100.702 35.092 100.702 36.28C100.702 38.128 101.116 39.622 101.944 40.762C102.772 41.902 104.002 42.472 105.634 42.472C106.786 42.472 107.692 42.208 108.352 41.68C109.024 41.152 109.528 40.39 109.864 39.394L114.292 40.384C113.692 42.364 112.642 43.888 111.142 44.956C109.642 46.012 107.806 46.54 105.634 46.54ZM124.878 46.54C122.934 46.54 121.236 46.102 119.784 45.226C118.332 44.35 117.204 43.144 116.4 41.608C115.608 40.06 115.212 38.284 115.212 36.28C115.212 34.24 115.62 32.452 116.436 30.916C117.252 29.38 118.386 28.18 119.838 27.316C121.29 26.452 122.97 26.02 124.878 26.02C126.834 26.02 128.538 26.458 129.99 27.334C131.442 28.21 132.57 29.422 133.374 30.97C134.178 32.506 134.58 34.276 134.58 36.28C134.58 38.296 134.172 40.078 133.356 41.626C132.552 43.162 131.424 44.368 129.972 45.244C128.52 46.108 126.822 46.54 124.878 46.54ZM124.878 42.472C126.606 42.472 127.89 41.896 128.73 40.744C129.57 39.592 129.99 38.104 129.99 36.28C129.99 34.396 129.564 32.896 128.712 31.78C127.86 30.652 126.582 30.088 124.878 30.088C123.714 30.088 122.754 30.352 121.998 30.88C121.254 31.396 120.702 32.122 120.342 33.058C119.982 33.982 119.802 35.056 119.802 36.28C119.802 38.164 120.228 39.67 121.08 40.798C121.944 41.914 123.21 42.472 124.878 42.472ZM142.902 46.54C141.498 46.54 140.31 46.276 139.338 45.748C138.366 45.208 137.628 44.494 137.124 43.606C136.632 42.718 136.386 41.74 136.386 40.672C136.386 39.736 136.542 38.896 136.854 38.152C137.166 37.396 137.646 36.748 138.294 36.208C138.942 35.656 139.782 35.206 140.814 34.858C141.594 34.606 142.506 34.378 143.55 34.174C144.606 33.97 145.746 33.784 146.97 33.616C148.206 33.436 149.496 33.244 150.84 33.04L149.292 33.922C149.304 32.578 149.004 31.588 148.392 30.952C147.78 30.316 146.748 29.998 145.296 29.998C144.42 29.998 143.574 30.202 142.758 30.61C141.942 31.018 141.372 31.72 141.048 32.716L137.088 31.474C137.568 29.83 138.48 28.51 139.824 27.514C141.18 26.518 143.004 26.02 145.296 26.02C147.024 26.02 148.542 26.302 149.85 26.866C151.17 27.43 152.148 28.354 152.784 29.638C153.132 30.322 153.342 31.024 153.414 31.744C153.486 32.452 153.522 33.226 153.522 34.066V46H149.724V41.788L150.354 42.472C149.478 43.876 148.452 44.908 147.276 45.568C146.112 46.216 144.654 46.54 142.902 46.54ZM143.766 43.084C144.75 43.084 145.59 42.91 146.286 42.562C146.982 42.214 147.534 41.788 147.942 41.284C148.362 40.78 148.644 40.306 148.788 39.862C149.016 39.31 149.142 38.68 149.166 37.972C149.202 37.252 149.22 36.67 149.22 36.226L150.552 36.622C149.244 36.826 148.122 37.006 147.186 37.162C146.25 37.318 145.446 37.468 144.774 37.612C144.102 37.744 143.508 37.894 142.992 38.062C142.488 38.242 142.062 38.452 141.714 38.692C141.366 38.932 141.096 39.208 140.904 39.52C140.724 39.832 140.634 40.198 140.634 40.618C140.634 41.098 140.754 41.524 140.994 41.896C141.234 42.256 141.582 42.544 142.038 42.76C142.506 42.976 143.082 43.084 143.766 43.084Z" fill="#F6F1EB"/><path d="M166.722 46.54C164.826 46.54 163.116 46.21 161.592 45.55C160.08 44.89 158.832 43.948 157.848 42.724C156.876 41.488 156.258 40.024 155.994 38.332L160.494 37.648C160.878 39.184 161.664 40.372 162.852 41.212C164.052 42.052 165.432 42.472 166.992 42.472C167.916 42.472 168.786 42.328 169.602 42.04C170.418 41.752 171.078 41.332 171.582 40.78C172.098 40.228 172.356 39.55 172.356 38.746C172.356 38.386 172.296 38.056 172.176 37.756C172.056 37.444 171.876 37.168 171.636 36.928C171.408 36.688 171.108 36.472 170.736 36.28C170.376 36.076 169.956 35.902 169.476 35.758L162.78 33.778C162.204 33.61 161.58 33.388 160.908 33.112C160.248 32.824 159.618 32.434 159.018 31.942C158.43 31.438 157.944 30.802 157.56 30.034C157.188 29.254 157.002 28.294 157.002 27.154C157.002 25.486 157.422 24.088 158.262 22.96C159.114 21.82 160.254 20.968 161.682 20.404C163.122 19.84 164.718 19.564 166.47 19.576C168.246 19.588 169.83 19.894 171.222 20.494C172.614 21.082 173.778 21.94 174.714 23.068C175.65 24.196 176.31 25.558 176.694 27.154L172.032 27.964C171.84 27.052 171.468 26.278 170.916 25.642C170.376 24.994 169.71 24.502 168.918 24.166C168.138 23.83 167.304 23.65 166.416 23.626C165.552 23.614 164.748 23.746 164.004 24.022C163.272 24.286 162.678 24.67 162.222 25.174C161.778 25.678 161.556 26.266 161.556 26.938C161.556 27.574 161.748 28.096 162.132 28.504C162.516 28.9 162.99 29.218 163.554 29.458C164.13 29.686 164.712 29.878 165.3 30.034L169.944 31.33C170.58 31.498 171.294 31.726 172.086 32.014C172.878 32.302 173.64 32.704 174.372 33.22C175.104 33.736 175.704 34.414 176.172 35.254C176.652 36.094 176.892 37.162 176.892 38.458C176.892 39.802 176.61 40.984 176.046 42.004C175.494 43.012 174.744 43.852 173.796 44.524C172.848 45.196 171.762 45.7 170.538 46.036C169.326 46.372 168.054 46.54 166.722 46.54ZM186.998 46.558C185.558 46.558 184.37 46.318 183.434 45.838C182.498 45.358 181.754 44.746 181.202 44.002C180.65 43.258 180.242 42.466 179.978 41.626C179.714 40.786 179.54 39.994 179.456 39.25C179.384 38.494 179.348 37.882 179.348 37.414V26.56H183.74V35.92C183.74 36.52 183.782 37.198 183.866 37.954C183.95 38.698 184.142 39.418 184.442 40.114C184.754 40.798 185.21 41.362 185.81 41.806C186.422 42.25 187.244 42.472 188.276 42.472C188.828 42.472 189.374 42.382 189.914 42.202C190.454 42.022 190.94 41.716 191.372 41.284C191.816 40.84 192.17 40.234 192.434 39.466C192.698 38.698 192.83 37.726 192.83 36.55L195.404 37.648C195.404 39.304 195.08 40.804 194.432 42.148C193.796 43.492 192.854 44.566 191.606 45.37C190.358 46.162 188.822 46.558 186.998 46.558ZM193.352 46V39.97H192.83V26.56H197.186V46H193.352ZM201.523 23.608V19.63H205.861V23.608H201.523ZM201.523 46V26.56H205.861V46H201.523ZM221.567 46C220.283 46.24 219.023 46.342 217.787 46.306C216.563 46.282 215.465 46.06 214.493 45.64C213.521 45.208 212.783 44.53 212.279 43.606C211.835 42.766 211.601 41.908 211.577 41.032C211.553 40.156 211.541 39.166 211.541 38.062V21.16H215.861V37.81C215.861 38.59 215.867 39.274 215.879 39.862C215.903 40.45 216.029 40.93 216.257 41.302C216.689 42.022 217.379 42.424 218.327 42.508C219.275 42.592 220.355 42.544 221.567 42.364V46ZM208.013 29.962V26.56H221.567V29.962H208.013ZM232.521 46.54C230.553 46.54 228.825 46.114 227.337 45.262C225.849 44.41 224.685 43.228 223.845 41.716C223.017 40.204 222.603 38.464 222.603 36.496C222.603 34.372 223.011 32.53 223.827 30.97C224.643 29.398 225.777 28.18 227.229 27.316C228.681 26.452 230.361 26.02 232.269 26.02C234.285 26.02 235.995 26.494 237.399 27.442C238.815 28.378 239.865 29.704 240.549 31.42C241.233 33.136 241.491 35.158 241.323 37.486H237.021V35.902C237.009 33.79 236.637 32.248 235.905 31.276C235.173 30.304 234.021 29.818 232.449 29.818C230.673 29.818 229.353 30.37 228.489 31.474C227.625 32.566 227.193 34.168 227.193 36.28C227.193 38.248 227.625 39.772 228.489 40.852C229.353 41.932 230.613 42.472 232.269 42.472C233.337 42.472 234.255 42.238 235.023 41.77C235.803 41.29 236.403 40.6 236.823 39.7L241.107 40.996C240.363 42.748 239.211 44.11 237.651 45.082C236.103 46.054 234.393 46.54 232.521 46.54ZM225.825 37.486V34.21H239.199V37.486H225.825Z" fill="#D6AE92"/></svg>
-  </a>
-  <nav>
-    <a href="https://cocoasuite.github.io/cocoacut/">Cut</a>
-    <a href="https://cocoasuite.github.io/cocoacanvas/">Canvas</a>
-    <a href="https://cocoasuite.github.io/cocoatune/">Tune</a>
-    <a href="https://cocoasuite.github.io/CocoaAuthor/">Author</a>
-  </nav>
-</div>
-
+<header class="top">
+<a class="brand" href="./" aria-label="CocoaSuite"><svg viewBox="3 3 240 58" height="40" style="display:block;height:40px;width:auto" role="img" aria-label="CocoaSuite"><path d="M48 10C43.5 5.9 38.5 4 32 4C16.5 4 4 16.5 4 32C4 47.5 16.5 60 32 60C38.5 60 43.5 58.1 48 54L40 44C37.8 46 35.3 47 32 47C23.7 47 17 40.3 17 32C17 23.7 23.7 17 32 17C35.3 17 37.8 18 40 20L48 10Z" fill="#D6AE92"/><path d="M35.9078 21.8647C35.5915 20.707 34.4481 19.9361 33.2966 20.2742C29.9721 21.2501 28.0335 24.6978 28.7846 28.4442C28.9839 29.4382 29.8527 30.1689 30.8663 30.151C34.6148 30.0849 37.3066 26.9856 35.9078 21.8647Z" fill="#D6AE92"/><path d="M42.3766 31.6824C42.4007 30.6345 41.6618 29.7182 40.6333 29.5161C36.9771 28.7978 34.1123 30.8544 33.4136 34.3112C33.2049 35.3441 33.7899 36.3748 34.7798 36.7362C38.7251 38.1765 42.2779 35.9817 42.3766 31.6824Z" fill="#D6AE92"/><path d="M29.0575 34.3802C28.5474 34.1002 27.938 34.04 27.3905 34.2371C23.6577 35.581 23.5403 40.1873 27.0382 43.1371C27.7549 43.7415 28.7881 43.8329 29.5667 43.3105C32.9728 41.0253 32.8031 36.4358 29.0575 34.3802Z" fill="#D6AE92"/><path d="M61.482 46.54C58.89 46.54 56.67 45.976 54.822 44.848C52.974 43.708 51.552 42.124 50.556 40.096C49.572 38.068 49.08 35.716 49.08 33.04C49.08 30.364 49.572 28.012 50.556 25.984C51.552 23.956 52.974 22.378 54.822 21.25C56.67 20.11 58.89 19.54 61.482 19.54C64.47 19.54 66.96 20.29 68.952 21.79C70.944 23.278 72.342 25.288 73.146 27.82L68.772 29.026C68.268 27.334 67.41 26.014 66.198 25.066C64.986 24.106 63.414 23.626 61.482 23.626C59.742 23.626 58.29 24.016 57.126 24.796C55.974 25.576 55.104 26.674 54.516 28.09C53.94 29.494 53.646 31.144 53.634 33.04C53.634 34.936 53.922 36.592 54.498 38.008C55.086 39.412 55.962 40.504 57.126 41.284C58.29 42.064 59.742 42.454 61.482 42.454C63.414 42.454 64.986 41.974 66.198 41.014C67.41 40.054 68.268 38.734 68.772 37.054L73.146 38.26C72.342 40.792 70.944 42.808 68.952 44.308C66.96 45.796 64.47 46.54 61.482 46.54ZM84.6041 46.54C82.6601 46.54 80.9621 46.102 79.5101 45.226C78.0581 44.35 76.9301 43.144 76.1261 41.608C75.3341 40.06 74.9381 38.284 74.9381 36.28C74.9381 34.24 75.3461 32.452 76.1621 30.916C76.9781 29.38 78.1121 28.18 79.5641 27.316C81.0161 26.452 82.6961 26.02 84.6041 26.02C86.5601 26.02 88.2641 26.458 89.7161 27.334C91.1681 28.21 92.2961 29.422 93.1001 30.97C93.9041 32.506 94.3061 34.276 94.3061 36.28C94.3061 38.296 93.8981 40.078 93.0821 41.626C92.2781 43.162 91.1501 44.368 89.6981 45.244C88.2461 46.108 86.5481 46.54 84.6041 46.54ZM84.6041 42.472C86.3321 42.472 87.6161 41.896 88.4561 40.744C89.2961 39.592 89.7161 38.104 89.7161 36.28C89.7161 34.396 89.2901 32.896 88.4381 31.78C87.5861 30.652 86.3081 30.088 84.6041 30.088C83.4401 30.088 82.4801 30.352 81.7241 30.88C80.9801 31.396 80.4281 32.122 80.0681 33.058C79.7081 33.982 79.5281 35.056 79.5281 36.28C79.5281 38.164 79.9541 39.67 80.8061 40.798C81.6701 41.914 82.9361 42.472 84.6041 42.472ZM105.634 46.54C103.63 46.54 101.92 46.096 100.504 45.208C99.088 44.308 98.002 43.084 97.246 41.536C96.502 39.988 96.124 38.236 96.112 36.28C96.124 34.288 96.514 32.524 97.282 30.988C98.062 29.44 99.166 28.228 100.594 27.352C102.022 26.464 103.72 26.02 105.688 26.02C107.896 26.02 109.762 26.578 111.286 27.694C112.822 28.798 113.824 30.31 114.292 32.23L109.972 33.4C109.636 32.356 109.078 31.546 108.298 30.97C107.518 30.382 106.63 30.088 105.634 30.088C104.506 30.088 103.576 30.358 102.844 30.898C102.112 31.426 101.572 32.158 101.224 33.094C100.876 34.03 100.702 35.092 100.702 36.28C100.702 38.128 101.116 39.622 101.944 40.762C102.772 41.902 104.002 42.472 105.634 42.472C106.786 42.472 107.692 42.208 108.352 41.68C109.024 41.152 109.528 40.39 109.864 39.394L114.292 40.384C113.692 42.364 112.642 43.888 111.142 44.956C109.642 46.012 107.806 46.54 105.634 46.54ZM124.878 46.54C122.934 46.54 121.236 46.102 119.784 45.226C118.332 44.35 117.204 43.144 116.4 41.608C115.608 40.06 115.212 38.284 115.212 36.28C115.212 34.24 115.62 32.452 116.436 30.916C117.252 29.38 118.386 28.18 119.838 27.316C121.29 26.452 122.97 26.02 124.878 26.02C126.834 26.02 128.538 26.458 129.99 27.334C131.442 28.21 132.57 29.422 133.374 30.97C134.178 32.506 134.58 34.276 134.58 36.28C134.58 38.296 134.172 40.078 133.356 41.626C132.552 43.162 131.424 44.368 129.972 45.244C128.52 46.108 126.822 46.54 124.878 46.54ZM124.878 42.472C126.606 42.472 127.89 41.896 128.73 40.744C129.57 39.592 129.99 38.104 129.99 36.28C129.99 34.396 129.564 32.896 128.712 31.78C127.86 30.652 126.582 30.088 124.878 30.088C123.714 30.088 122.754 30.352 121.998 30.88C121.254 31.396 120.702 32.122 120.342 33.058C119.982 33.982 119.802 35.056 119.802 36.28C119.802 38.164 120.228 39.67 121.08 40.798C121.944 41.914 123.21 42.472 124.878 42.472ZM142.902 46.54C141.498 46.54 140.31 46.276 139.338 45.748C138.366 45.208 137.628 44.494 137.124 43.606C136.632 42.718 136.386 41.74 136.386 40.672C136.386 39.736 136.542 38.896 136.854 38.152C137.166 37.396 137.646 36.748 138.294 36.208C138.942 35.656 139.782 35.206 140.814 34.858C141.594 34.606 142.506 34.378 143.55 34.174C144.606 33.97 145.746 33.784 146.97 33.616C148.206 33.436 149.496 33.244 150.84 33.04L149.292 33.922C149.304 32.578 149.004 31.588 148.392 30.952C147.78 30.316 146.748 29.998 145.296 29.998C144.42 29.998 143.574 30.202 142.758 30.61C141.942 31.018 141.372 31.72 141.048 32.716L137.088 31.474C137.568 29.83 138.48 28.51 139.824 27.514C141.18 26.518 143.004 26.02 145.296 26.02C147.024 26.02 148.542 26.302 149.85 26.866C151.17 27.43 152.148 28.354 152.784 29.638C153.132 30.322 153.342 31.024 153.414 31.744C153.486 32.452 153.522 33.226 153.522 34.066V46H149.724V41.788L150.354 42.472C149.478 43.876 148.452 44.908 147.276 45.568C146.112 46.216 144.654 46.54 142.902 46.54ZM143.766 43.084C144.75 43.084 145.59 42.91 146.286 42.562C146.982 42.214 147.534 41.788 147.942 41.284C148.362 40.78 148.644 40.306 148.788 39.862C149.016 39.31 149.142 38.68 149.166 37.972C149.202 37.252 149.22 36.67 149.22 36.226L150.552 36.622C149.244 36.826 148.122 37.006 147.186 37.162C146.25 37.318 145.446 37.468 144.774 37.612C144.102 37.744 143.508 37.894 142.992 38.062C142.488 38.242 142.062 38.452 141.714 38.692C141.366 38.932 141.096 39.208 140.904 39.52C140.724 39.832 140.634 40.198 140.634 40.618C140.634 41.098 140.754 41.524 140.994 41.896C141.234 42.256 141.582 42.544 142.038 42.76C142.506 42.976 143.082 43.084 143.766 43.084Z" fill="#F6F1EB"/><path d="M166.722 46.54C164.826 46.54 163.116 46.21 161.592 45.55C160.08 44.89 158.832 43.948 157.848 42.724C156.876 41.488 156.258 40.024 155.994 38.332L160.494 37.648C160.878 39.184 161.664 40.372 162.852 41.212C164.052 42.052 165.432 42.472 166.992 42.472C167.916 42.472 168.786 42.328 169.602 42.04C170.418 41.752 171.078 41.332 171.582 40.78C172.098 40.228 172.356 39.55 172.356 38.746C172.356 38.386 172.296 38.056 172.176 37.756C172.056 37.444 171.876 37.168 171.636 36.928C171.408 36.688 171.108 36.472 170.736 36.28C170.376 36.076 169.956 35.902 169.476 35.758L162.78 33.778C162.204 33.61 161.58 33.388 160.908 33.112C160.248 32.824 159.618 32.434 159.018 31.942C158.43 31.438 157.944 30.802 157.56 30.034C157.188 29.254 157.002 28.294 157.002 27.154C157.002 25.486 157.422 24.088 158.262 22.96C159.114 21.82 160.254 20.968 161.682 20.404C163.122 19.84 164.718 19.564 166.47 19.576C168.246 19.588 169.83 19.894 171.222 20.494C172.614 21.082 173.778 21.94 174.714 23.068C175.65 24.196 176.31 25.558 176.694 27.154L172.032 27.964C171.84 27.052 171.468 26.278 170.916 25.642C170.376 24.994 169.71 24.502 168.918 24.166C168.138 23.83 167.304 23.65 166.416 23.626C165.552 23.614 164.748 23.746 164.004 24.022C163.272 24.286 162.678 24.67 162.222 25.174C161.778 25.678 161.556 26.266 161.556 26.938C161.556 27.574 161.748 28.096 162.132 28.504C162.516 28.9 162.99 29.218 163.554 29.458C164.13 29.686 164.712 29.878 165.3 30.034L169.944 31.33C170.58 31.498 171.294 31.726 172.086 32.014C172.878 32.302 173.64 32.704 174.372 33.22C175.104 33.736 175.704 34.414 176.172 35.254C176.652 36.094 176.892 37.162 176.892 38.458C176.892 39.802 176.61 40.984 176.046 42.004C175.494 43.012 174.744 43.852 173.796 44.524C172.848 45.196 171.762 45.7 170.538 46.036C169.326 46.372 168.054 46.54 166.722 46.54ZM186.998 46.558C185.558 46.558 184.37 46.318 183.434 45.838C182.498 45.358 181.754 44.746 181.202 44.002C180.65 43.258 180.242 42.466 179.978 41.626C179.714 40.786 179.54 39.994 179.456 39.25C179.384 38.494 179.348 37.882 179.348 37.414V26.56H183.74V35.92C183.74 36.52 183.782 37.198 183.866 37.954C183.95 38.698 184.142 39.418 184.442 40.114C184.754 40.798 185.21 41.362 185.81 41.806C186.422 42.25 187.244 42.472 188.276 42.472C188.828 42.472 189.374 42.382 189.914 42.202C190.454 42.022 190.94 41.716 191.372 41.284C191.816 40.84 192.17 40.234 192.434 39.466C192.698 38.698 192.83 37.726 192.83 36.55L195.404 37.648C195.404 39.304 195.08 40.804 194.432 42.148C193.796 43.492 192.854 44.566 191.606 45.37C190.358 46.162 188.822 46.558 186.998 46.558ZM193.352 46V39.97H192.83V26.56H197.186V46H193.352ZM201.523 23.608V19.63H205.861V23.608H201.523ZM201.523 46V26.56H205.861V46H201.523ZM221.567 46C220.283 46.24 219.023 46.342 217.787 46.306C216.563 46.282 215.465 46.06 214.493 45.64C213.521 45.208 212.783 44.53 212.279 43.606C211.835 42.766 211.601 41.908 211.577 41.032C211.553 40.156 211.541 39.166 211.541 38.062V21.16H215.861V37.81C215.861 38.59 215.867 39.274 215.879 39.862C215.903 40.45 216.029 40.93 216.257 41.302C216.689 42.022 217.379 42.424 218.327 42.508C219.275 42.592 220.355 42.544 221.567 42.364V46ZM208.013 29.962V26.56H221.567V29.962H208.013ZM232.521 46.54C230.553 46.54 228.825 46.114 227.337 45.262C225.849 44.41 224.685 43.228 223.845 41.716C223.017 40.204 222.603 38.464 222.603 36.496C222.603 34.372 223.011 32.53 223.827 30.97C224.643 29.398 225.777 28.18 227.229 27.316C228.681 26.452 230.361 26.02 232.269 26.02C234.285 26.02 235.995 26.494 237.399 27.442C238.815 28.378 239.865 29.704 240.549 31.42C241.233 33.136 241.491 35.158 241.323 37.486H237.021V35.902C237.009 33.79 236.637 32.248 235.905 31.276C235.173 30.304 234.021 29.818 232.449 29.818C230.673 29.818 229.353 30.37 228.489 31.474C227.625 32.566 227.193 34.168 227.193 36.28C227.193 38.248 227.625 39.772 228.489 40.852C229.353 41.932 230.613 42.472 232.269 42.472C233.337 42.472 234.255 42.238 235.023 41.77C235.803 41.29 236.403 40.6 236.823 39.7L241.107 40.996C240.363 42.748 239.211 44.11 237.651 45.082C236.103 46.054 234.393 46.54 232.521 46.54ZM225.825 37.486V34.21H239.199V37.486H225.825Z" fill="#D6AE92"/></svg></a>
+<label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A3A3A8" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="sr">Search apps</span><input id="q" type="search" placeholder="Search apps"></label>
+<a class="gh" href="https://github.com/CocoaSuite">GitHub</a>
+</header>
+<div class="lay">
+<nav class="side" aria-label="Categories"><span class="lbl">Browse</span><button type="button" class="sb on" data-cat="All apps" aria-pressed="true">All apps</button><button type="button" class="sb" data-cat="Video" aria-pressed="false">Video</button><button type="button" class="sb" data-cat="Design" aria-pressed="false">Design</button><button type="button" class="sb" data-cat="Music" aria-pressed="false">Music</button><button type="button" class="sb" data-cat="Writing" aria-pressed="false">Writing</button></nav>
 <main>
-  <section class="wrap hero">
-    <h1>Make it. Cut it. <em>Play it.</em></h1>
-    <div class="lede">
-      <p>Design a poster, trim a video, write a report, play your own music. Each app runs in the browser, with the same look and no account. Everything stays on your computer: <b>no uploads, no sign-up.</b></p>
-      <div class="cta">
-        <a class="btn pri" href="https://cocoasuite.github.io/cocoacut/">Open Cut</a>
-        <a class="btn sec" href="#apps">See the apps</a>
-      </div>
-    </div>
-
-    <div class="tiles">
-      <a class="crown" href="https://cocoasuite.github.io/cocoacut/">
-        <span class="mono" style="opacity:.85">Video · Flagship</span>
-        <div class="disp">Cocoa Cut</div>
-        <p>A video editor in the browser. Say the change, see it, export a file.</p>
-        <svg viewBox="0 0 900 150" width="100%" role="img" aria-hidden="true" style="display:block">
-          <rect x="0" y="10" width="900" height="26" rx="4" fill="#2e6d51"/>
-          <g font-family="JetBrains Mono, monospace" font-size="11" fill="#F6F1EB" opacity=".7"><text x="8" y="28">00:00</text><text x="150" y="28">00:05</text><text x="300" y="28">00:10</text><text x="450" y="28">00:15</text><text x="600" y="28">00:20</text><text x="750" y="28">00:25</text></g>
-          <rect x="0" y="50" width="250" height="36" rx="6" fill="#F6F1EB" opacity=".9"/>
-          <rect x="256" y="50" width="330" height="36" rx="6" fill="#F6F1EB" opacity=".6"/>
-          <rect x="592" y="50" width="308" height="36" rx="6" fill="#F6F1EB" opacity=".9"/>
-          <rect x="0" y="94" width="120" height="36" rx="6" fill="#E8A15C"/>
-          <rect x="126" y="94" width="260" height="36" rx="6" fill="#E8A15C" opacity=".75"/>
-          <rect x="392" y="94" width="508" height="36" rx="6" fill="#E8A15C" opacity=".9"/>
-          <rect x="0" y="0" width="2.5" height="150" fill="#14100D"><animate attributeName="x" values="0;897" dur="8s" repeatCount="indefinite"/></rect>
-        </svg>
-        <span class="go">Open landing →</span>
-      </a>
-
-      <div class="row2">
-        <a class="tile cv" href="https://cocoasuite.github.io/cocoacanvas/">
-          <span class="mono" style="opacity:.8">Design</span>
-          <div class="disp">Cocoa Canvas</div>
-          <p>A standalone design tool for interfaces, posters and layouts, built in HTML.</p>
-          <svg viewBox="0 0 260 130" width="100%" role="img" aria-hidden="true" style="display:block">
-            <g stroke="#F6F1EB" stroke-opacity=".18" stroke-width=".8">
-              <line x1="0" y1="26" x2="260" y2="26"/><line x1="0" y1="52" x2="260" y2="52"/><line x1="0" y1="78" x2="260" y2="78"/><line x1="0" y1="104" x2="260" y2="104"/>
-              <line x1="52" y1="0" x2="52" y2="130"/><line x1="104" y1="0" x2="104" y2="130"/><line x1="156" y1="0" x2="156" y2="130"/><line x1="208" y1="0" x2="208" y2="130"/>
-            </g>
-            <polygon id="cvPoly" points="50,40 150,22 200,96 80,116" fill="#F6F1EB" fill-opacity=".2" stroke="#F6F1EB" stroke-width="2" stroke-linejoin="round"/>
-            <g fill="#E8A15C"><circle class="cvH" cx="50" cy="40" r="4.5"/><circle class="cvH" cx="150" cy="22" r="4.5"/><circle class="cvH" cx="200" cy="96" r="4.5"/><circle class="cvH" cx="80" cy="116" r="4.5"/></g>
-            <g id="cvTf" opacity="0">
-              <rect id="cvBox" x="56" y="50" width="0" height="28" rx="3" fill="none" stroke="#E8A15C" stroke-width="1.5" stroke-dasharray="4 3"/>
-              <text id="cvTxt" x="64" y="69" font-family="Unbounded, system-ui, sans-serif" font-weight="700" font-size="12" fill="#F6F1EB"></text>
-              <rect id="cvCaret" x="64" y="56" width="2" height="16" fill="#E8A15C" opacity="0"/>
-            </g>
-          </svg>
-          <span class="go">Open landing →</span>
-        </a>
-        <a class="tile ct" href="https://cocoasuite.github.io/cocoatune/">
-          <span class="mono" style="opacity:.8">Music</span>
-          <div class="disp">Cocoa Tune</div>
-          <p>A music player for local files, plus tracks saved from web links.</p>
-          <svg viewBox="0 0 260 130" width="100%" role="img" aria-hidden="true" style="display:block">
-            <g class="eq" fill="#F6F1EB" opacity=".9">
-              <rect x="4" y="80" width="10" height="44" rx="2"/><rect x="20" y="52" width="10" height="72" rx="2"/><rect x="36" y="66" width="10" height="58" rx="2"/><rect x="52" y="30" width="10" height="94" rx="2"/>
-              <rect x="68" y="60" width="10" height="64" rx="2"/><rect x="84" y="14" width="10" height="110" rx="2"/><rect x="100" y="70" width="10" height="54" rx="2"/><rect x="116" y="40" width="10" height="84" rx="2"/>
-              <rect x="132" y="56" width="10" height="68" rx="2"/><rect x="148" y="24" width="10" height="100" rx="2"/><rect x="164" y="74" width="10" height="50" rx="2"/><rect x="180" y="46" width="10" height="78" rx="2"/>
-              <rect x="196" y="64" width="10" height="60" rx="2"/><rect x="212" y="36" width="10" height="88" rx="2"/><rect x="228" y="82" width="10" height="42" rx="2"/><rect x="244" y="58" width="10" height="66" rx="2"/>
-            </g>
-          </svg>
-        <a class="tile au" href="https://cocoasuite.github.io/CocoaAuthor/">
-          <span class="mono" style="opacity:.8">Writing</span>
-          <div class="disp">Cocoa Author</div>
-          <p>Write long documents with live pages, then publish them as PDF or Word files.</p>
-          <svg viewBox="0 0 260 130" width="100%" role="img" aria-hidden="true" style="display:block">
-            <rect x="40" y="8" width="84" height="116" rx="3" fill="#F6F1EB" opacity=".9"/>
-            <rect x="136" y="8" width="84" height="116" rx="3" fill="#F6F1EB" opacity=".55"/>
-            <g fill="#7d4f6c"><rect x="50" y="20" width="44" height="6" rx="1.5"/><rect x="50" y="34" width="64" height="3" rx="1.5" opacity=".6"/><rect x="50" y="42" width="60" height="3" rx="1.5" opacity=".6"/><rect x="50" y="50" width="64" height="3" rx="1.5" opacity=".6"/><rect x="50" y="58" width="38" height="3" rx="1.5" opacity=".6"/><rect x="50" y="70" width="64" height="30" rx="2" opacity=".3"/><rect x="50" y="106" width="52" height="3" rx="1.5" opacity=".6"/></g>
-            <g fill="#7d4f6c" opacity=".6"><rect x="146" y="20" width="64" height="3" rx="1.5"/><rect x="146" y="28" width="58" height="3" rx="1.5"/><rect x="146" y="36" width="64" height="3" rx="1.5"/><rect x="146" y="44" width="0" height="3" rx="1.5"><animate attributeName="width" values="0;64;64" keyTimes="0;.7;1" dur="4s" repeatCount="indefinite"/></rect></g>
-          </svg>
-          <span class="go">Open landing →</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="apps" class="paper">
-    <div class="wrap apps">
-      <div>
-        <span class="eyebrow mono">The apps</span>
-        <h2 class="disp">Pick a tool. The look stays the same.</h2>
-      </div>
-      <ol>
-        <li><span><span class="disp">Cocoa Cut</span><span class="d">A video editor in the browser. Say the change, see it, export a file.</span></span><a class="mono" href="https://cocoasuite.github.io/cocoacut/">→ Landing</a></li>
-        <li><span><span class="disp">Cocoa Canvas</span><span class="d">A standalone design tool for interfaces, posters and layouts, built in HTML.</span></span><a class="mono" href="https://cocoasuite.github.io/cocoacanvas/">→ Landing</a></li>
-        <li><span><span class="disp">Cocoa Tune</span><span class="d">A music player for local files, plus saved links from the web.</span></span><a class="mono" href="https://cocoasuite.github.io/cocoatune/">→ Landing</a></li>
-        <li><span><span class="disp">Cocoa Author</span><span class="d">A writing workspace for long documents, published as PDF or Word files.</span></span><a class="mono" href="https://cocoasuite.github.io/CocoaAuthor/">→ Landing</a></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="wrap ledger-wrap">
-    <div class="ledger-head">
-      <h2 class="disp">What’s in the suite</h2>
-      <p class="muted" style="margin:0;max-width:24rem">The same habits across every app, so switching between them takes no relearning.</p>
-    </div>
-    <div class="ledger">
-      <div class="item"><span class="tag" style="background:var(--ca)">CT</span><h3>Cut without the menus</h3><p>Trim, caption and export a video from one window, with no render queue.</p></div>
-      <div class="item"><span class="tag" style="background:var(--cv)">CV</span><h3>Browser-first</h3><p>Open a tool in a tab. Nothing to install, and the same look everywhere.</p></div>
-      <div class="item"><span class="tag" style="background:var(--ct)">TU</span><h3>Your music, your links</h3><p>Play local files, or save tracks from web links through the Tune backend.</p></div>
-      <div class="item"><span class="tag" style="background:var(--au)">AU</span><h3>Pages as you type</h3><p>Write with live page layout, then export a PDF or an editable Word file.</p></div>
-      <div class="item"><span class="tag" style="background:var(--caramel)">EN</span><h3>English and Russian</h3><p>Every landing and app page reads in both languages.</p></div>
-    </div>
-  </section>
-
-  <section class="wrap promise">
-    <h2 class="disp">Your files stay on your computer. <span>Not even to us.</span></h2>
-    <div class="facts mono"><span>No sign-up</span><span>Works offline</span><span>No cloud render</span><span>English &amp; Russian</span></div>
-  </section>
-
-  <section class="wrap">
-    <div class="end">
-      <h2 class="disp">Pick a tool and start.</h2>
-      <div class="cta">
-        <a class="btn pri" href="https://cocoasuite.github.io/cocoacut/">Open Cut</a>
-        <a class="btn sec" href="https://cocoasuite.github.io/cocoacanvas/">Open Canvas</a>
-      </div>
-    </div>
-    <footer class="foot mono">
-      <span>CocoaSuite · Cut · Canvas · Tune · Author</span>
-      <a href="https://github.com/CocoaSuite">github.com/CocoaSuite</a>
-    </footer>
-  </section>
+<section class="ft">
+<div><div class="pv" data-k="cut"><div style="border: 1px solid #2A231E; border-radius: 14px; background: #0F0C0A; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #221C18; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8077"><span></span><span style="width: 8px; height: 8px; border-radius: 4px; background: #693E2C"></span></div>
+<div style="position: relative; height: 360px; overflow: hidden"><div style="position: absolute; left: 24px; right: 24px; top: 24px; height: 170px; border-radius: 8px; background: #1C1613; display: flex; align-items: center; justify-content: center"><div style="width: 0; height: 0; border-left: 22px solid #F6F1EB; border-top: 14px solid transparent; border-bottom: 14px solid transparent; opacity: .8"></div></div>
+<div style="position: absolute; left: 24px; right: 24px; bottom: 24px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; gap: 6px"><div style="flex: 3; height: 30px; border-radius: 5px; background: #693E2C"></div><div style="flex: 4; height: 30px; border-radius: 5px; background: #8A5A43"></div><div style="flex: 3; height: 30px; border-radius: 5px; background: #693E2C"></div></div>
+<div style="display: flex; gap: 6px"><div style="flex: 2; height: 30px; border-radius: 5px; background: #E8A15C; opacity: .85"></div><div style="flex: 5; height: 30px; border-radius: 5px; background: #E8A15C; opacity: .5"></div><div style="flex: 3; height: 30px; border-radius: 5px; background: #E8A15C; opacity: .85"></div></div>
+<div style="display: flex; gap: 6px"><div style="flex: 6; height: 18px; border-radius: 5px; background: #2A2420"></div><div style="flex: 4; height: 18px; border-radius: 5px; background: #2A2420"></div></div>
+<div class="ph"></div></div></div>
+</div></div><div class="pv" data-k="canvas" hidden><div style="border: 1px solid #2A231E; border-radius: 14px; background: #0F0C0A; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #221C18; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8077"><span></span><span style="width: 8px; height: 8px; border-radius: 4px; background: #D15A2C"></span></div>
+<div style="position: relative; height: 360px; overflow: hidden"><svg viewBox="0 0 600 340" width="100%" height="340" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="display: block">
+<g stroke="#F6F1EB" stroke-opacity=".05"><path d="M0 68H600M0 136H600M0 204H600M0 272H600M100 0V340M200 0V340M300 0V340M400 0V340M500 0V340"/></g>
+<rect x="70" y="40" width="200" height="260" rx="4" fill="#1C1613" stroke="#2A231E"/>
+<circle cx="170" cy="140" r="56" fill="#D15A2C" fill-opacity=".85"/>
+<rect x="100" y="226" width="120" height="10" rx="2" fill="#F6F1EB" fill-opacity=".8"/><rect x="100" y="244" width="80" height="6" rx="2" fill="#F6F1EB" fill-opacity=".4"/>
+<polygon points="330,90 480,64 530,220 370,256" fill="#D15A2C" fill-opacity=".14" stroke="#D15A2C" stroke-width="1.5"/>
+<rect class="ants" x="318" y="52" width="224" height="216" fill="none" stroke="#F6F1EB" stroke-opacity=".45" stroke-dasharray="4 3"/>
+<g fill="#F6F1EB" stroke="#D15A2C" stroke-width="1.5"><circle class="hd" cx="330" cy="90" r="4"/><circle class="hd" cx="480" cy="64" r="4" style="animation-delay:.6s"/><circle class="hd" cx="530" cy="220" r="4" style="animation-delay:1.2s"/><circle class="hd" cx="370" cy="256" r="4" style="animation-delay:1.8s"/></g>
+</svg></div>
+</div></div><div class="pv" data-k="tune" hidden><div style="border: 1px solid #2A231E; border-radius: 14px; background: #0F0C0A; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #221C18; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8077"><span></span><span style="width: 8px; height: 8px; border-radius: 4px; background: #D70C0C"></span></div>
+<div style="position: relative; height: 360px; overflow: hidden"><div style="position: absolute; left: 24px; top: 24px; width: 220px; display: flex; flex-direction: column; gap: 10px">
+<div style="height: 160px; border-radius: 8px; background: #1C1613"></div>
+<div style="height: 10px; width: 80%; border-radius: 2px; background: #F6F1EB; opacity: .8"></div><div style="height: 6px; width: 50%; border-radius: 2px; background: #F6F1EB; opacity: .35"></div>
+<div style="margin-top: 14px; height: 3px; border-radius: 2px; background: #2A2420; position: relative"><div class="pr" style="position: absolute; left: 0; top: 0; bottom: 0; background: #D70C0C; border-radius: 2px"></div></div></div>
+<div style="position: absolute; left: 272px; right: 24px; top: 24px; bottom: 24px; display: flex; align-items: flex-end; gap: 6px"><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.1s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.5s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.9s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.3s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.7s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -1.1s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.2s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.8s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.4s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -1s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.6s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.15s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.45s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.85s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.25s"></div><div class="eq" style="flex: 1; height: 100%; border-radius: 3px; background: #D70C0C; animation-delay: -.65s"></div></div></div>
+</div></div><div class="pv" data-k="author" hidden><div style="border: 1px solid #2A231E; border-radius: 14px; background: #0F0C0A; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #221C18; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8077"><span></span><span style="width: 8px; height: 8px; border-radius: 4px; background: #8AA7D9"></span></div>
+<div style="position: relative; height: 360px; overflow: hidden"><div style="position: absolute; inset: 36px 0 0 0; display: flex; justify-content: center; gap: 22px">
+<div style="width: 190px; height: 268px; border-radius: 4px; background: #F6F1EB; padding: 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 9px"><div style="width: 64%; height: 12px; border-radius: 2px; background: #2B3A55"></div><div style="height: 5px; border-radius: 2px; background: #8AA7D9; width: 100%"></div><div style="height: 5px; border-radius: 2px; background: #8AA7D9; width: 92%"></div><div style="height: 5px; border-radius: 2px; background: #8AA7D9; width: 100%"></div><div style="height: 54px; border-radius: 3px; background: #DCE4F2; margin: 4px 0"></div><div style="height: 5px; border-radius: 2px; background: #8AA7D9; width: 100%"></div><div style="height: 5px; border-radius: 2px; background: #8AA7D9; width: 70%"></div></div>
+<div style="width: 190px; height: 268px; border-radius: 4px; background: #F6F1EB; padding: 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 9px"><div style="height: 5px; border-radius: 2px; background: #8AA7D9; width: 100%"></div><div style="height: 5px; border-radius: 2px; background: #8AA7D9; width: 88%"></div><div style="height: 5px; border-radius: 2px; background: #8AA7D9; width: 100%"></div><div style="height: 5px; border-radius: 2px; background: #8AA7D9; width: 94%"></div><div style="display: flex; align-items: center; gap: 1px"><div class="ty" style="height: 5px; border-radius: 2px; background: #8AA7D9"></div><div class="cr" style="width: 1.5px; height: 11px; background: #2B3A55"></div></div></div>
+</div></div>
+</div></div></div>
+<div class="fi">
+<span id="ft" class="tile" style="width:64px;height:64px;border-radius:16px;background:#693E2C"><img src="icons/cut.svg" alt=""></span>
+<span id="fc" class="cat">Video</span>
+<h1 id="fl">Edit video by saying what you want.</h1>
+<p id="fd">Trim, caption and arrange clips on a timeline, then export a file.</p>
+<a id="fo" class="btn lg" href="https://cocoasuite.github.io/cocoacut/">Open Cocoa Cut</a>
+</div>
+</section>
+<section>
+<h2 id="hd">All apps</h2>
+<div class="g4"><div class="card on" data-k="cut" data-cat="Video" data-name="cocoa cut">
+<div class="ch"><span class="tile" style="width:48px;height:48px;border-radius:12px;background:#693E2C"><img src="icons/cut.svg" alt=""></span><div><h3>Cocoa Cut</h3><span class="sub">Video</span></div></div>
+<p>Trim, caption and arrange clips on a timeline, then export a file.</p>
+<div class="acts"><a class="btn" href="https://cocoasuite.github.io/cocoacut/">Open</a><button type="button" class="ghost" data-pv="cut">Preview</button></div>
+</div><div class="card" data-k="canvas" data-cat="Design" data-name="cocoa canvas">
+<div class="ch"><span class="tile" style="width:48px;height:48px;border-radius:12px;background:#D15A2C"><img src="icons/canvas.svg" alt=""></span><div><h3>Cocoa Canvas</h3><span class="sub">Design</span></div></div>
+<p>Interfaces, posters and layouts with frames, layers, pen paths and boolean shapes.</p>
+<div class="acts"><a class="btn" href="https://cocoasuite.github.io/cocoacanvas/">Open</a><button type="button" class="ghost" data-pv="canvas">Preview</button></div>
+</div><div class="card" data-k="tune" data-cat="Music" data-name="cocoa tune">
+<div class="ch"><span class="tile" style="width:48px;height:48px;border-radius:12px;background:#D70C0C"><img src="icons/tune.svg" alt=""></span><div><h3>Cocoa Tune</h3><span class="sub">Music</span></div></div>
+<p>Play the music on your computer, plus tracks saved from web links.</p>
+<div class="acts"><a class="btn" href="https://cocoasuite.github.io/cocoatune/">Open</a><button type="button" class="ghost" data-pv="tune">Preview</button></div>
+</div><div class="card" data-k="author" data-cat="Writing" data-name="cocoa author">
+<div class="ch"><span class="tile" style="width:48px;height:48px;border-radius:12px;background:#8AA7D9"><img src="icons/author.svg" alt=""></span><div><h3>Cocoa Author</h3><span class="sub">Writing</span></div></div>
+<p>Long documents with live pages, published as PDF or Word.</p>
+<div class="acts"><a class="btn" href="https://cocoasuite.github.io/CocoaAuthor/">Open</a><button type="button" class="ghost" data-pv="author">Preview</button></div>
+</div></div>
+<p id="none" class="none" hidden>No apps match that search.</p>
+</section>
 </main>
-
+</div>
 <script>
-(()=>{
-const R=matchMedia('(prefers-reduced-motion: reduce)').matches;
-if(R)document.querySelectorAll('svg').forEach(s=>s.pauseAnimations&&s.pauseAnimations());
-const $=id=>document.getElementById(id),poly=$('cvPoly');if(!poly)return;
-const hs=[...document.querySelectorAll('.cvH')],tf=$('cvTf'),box=$('cvBox'),txt=$('cvTxt'),car=$('cvCaret');
-const base=[[50,40],[150,22],[200,96],[80,116]],amp=[[10,7],[12,8],[9,9],[11,6]],sp=[[.53,.37],[.41,.61],[.67,.29],[.33,.49]],ph=[[0,1.7],[2.1,.4],[3.9,2.6],[1.2,4.4]];
-const msg='Hello, Cocoa!',W=118,TX=+car.getAttribute('x'),CYC=9000,ease=x=>1-Math.pow(1-x,3);
-if(R){tf.setAttribute('opacity',1);box.setAttribute('width',W);txt.textContent=msg;return}
-let active=-1;const boost=[0,0,0,0],t0=performance.now();
-setInterval(()=>{active=Math.floor(Math.random()*4)},1600);
-function f(t){const s=(t-t0)/1000,p=[];
- for(let i=0;i<4;i++){boost[i]+=((i===active?1:0)-boost[i])*.04;const k=1+boost[i]*.9;
-  const x=base[i][0]+amp[i][0]*k*(Math.sin(s*sp[i][0]+ph[i][0])+.35*Math.sin(s*sp[i][0]*2.3+ph[i][1]));
-  const y=base[i][1]+amp[i][1]*k*(Math.sin(s*sp[i][1]+ph[i][1])+.35*Math.sin(s*sp[i][1]*1.9+ph[i][0]));
-  p.push(x.toFixed(1)+','+y.toFixed(1));hs[i].setAttribute('cx',x.toFixed(1));hs[i].setAttribute('cy',y.toFixed(1));hs[i].setAttribute('r',(4.5+boost[i]*2).toFixed(2))}
- poly.setAttribute('points',p.join(' '));
- const c=(t-t0)%CYC;let op=1,w=W,n=0,cv=0;
- if(c<1000){op=0;w=0}
- else if(c<1700){w=W*ease((c-1000)/700);op=Math.min(1,(c-1000)/150)}
- else if(c<2000){cv=1}
- else if(c<2000+msg.length*95){n=Math.floor((c-2000)/95)+1;cv=1}
- else if(c<7600){n=msg.length;cv=Math.floor(c/500)%2}
- else if(c<8200){n=msg.length;op=1-(c-7600)/600}
- else op=0;
- tf.setAttribute('opacity',op.toFixed(2));box.setAttribute('width',w.toFixed(1));txt.textContent=msg.slice(0,n);
- let cx=TX;try{cx=TX+(n?txt.getComputedTextLength():0)+1}catch(e){}
- car.setAttribute('x',cx.toFixed(1));car.setAttribute('opacity',cv);
- requestAnimationFrame(f)}
-requestAnimationFrame(f);
-})();
+const A = {cut:{n:"Cocoa Cut",c:"Video",bg:"#693E2C",u:"https://cocoasuite.github.io/cocoacut/",l:"Edit video by saying what you want.",d:"Trim, caption and arrange clips on a timeline, then export a file."},canvas:{n:"Cocoa Canvas",c:"Design",bg:"#D15A2C",u:"https://cocoasuite.github.io/cocoacanvas/",l:"Vector design without the install.",d:"Interfaces, posters and layouts with frames, layers, pen paths and boolean shapes."},tune:{n:"Cocoa Tune",c:"Music",bg:"#D70C0C",u:"https://cocoasuite.github.io/cocoatune/",l:"Your library, plus the links you save.",d:"Play the music on your computer, plus tracks saved from web links."},author:{n:"Cocoa Author",c:"Writing",bg:"#8AA7D9",u:"https://cocoasuite.github.io/CocoaAuthor/",l:"Long documents that look finished as you type.",d:"Long documents with live pages, published as PDF or Word."}};
+const $ = (s) => document.querySelector(s), $$ = (s) => document.querySelectorAll(s);
+let cat = 'All apps';
+function show(k) {
+  const a = A[k];
+  $$('.pv').forEach((e) => e.hidden = e.dataset.k !== k);
+  $$('.card').forEach((e) => e.classList.toggle('on', e.dataset.k === k));
+  $('#ft').style.background = a.bg;
+  $('#ft img').src = 'icons/' + k + '.svg';
+  $('#fc').textContent = a.c;
+  $('#fl').textContent = a.l;
+  $('#fd').textContent = a.d;
+  $('#fo').href = a.u;
+  $('#fo').textContent = 'Open ' + a.n;
+}
+function filter() {
+  const q = $('#q').value.trim().toLowerCase();
+  let n = 0;
+  $$('.card').forEach((e) => {
+    const ok = (cat === 'All apps' || e.dataset.cat === cat) && (!q || e.dataset.name.includes(q));
+    e.hidden = !ok;
+    if (ok) n++;
+  });
+  $('#none').hidden = n > 0;
+  $('#hd').textContent = cat;
+}
+$$('.sb').forEach((b) => b.onclick = () => {
+  cat = b.dataset.cat;
+  $$('.sb').forEach((x) => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b); });
+  filter();
+});
+$$('[data-pv]').forEach((b) => b.onclick = () => show(b.dataset.pv));
+$('#q').oninput = filter;
 </script>
 </body>
 </html>
