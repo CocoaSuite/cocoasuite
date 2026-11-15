@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--night:#14100D;--paper:#F4EEE6;--cream:#F6F1EB;--ink:#1E1612;--cocoa:#693E2C;--caramel:#E8A15C;--mute:#9C8F84;--mute2:#6E6259;--line:#2b2522;--cv:#3d6a9e;--ct:#a8703e;--ca:#3c8a66;--disp:'Unbounded',system-ui,sans-serif;--sans:'Manrope',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;--pad:clamp(16px,5vw,72px)}
+:root{--night:#14100D;--paper:#F4EEE6;--cream:#F6F1EB;--ink:#1E1612;--cocoa:#693E2C;--caramel:#E8A15C;--mute:#9C8F84;--mute2:#6E6259;--line:#2b2522;--cv:#3d6a9e;--ct:#a8703e;--ca:#3c8a66;--au:#7d4f6c;--disp:'Unbounded',system-ui,sans-serif;--sans:'Manrope',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;--pad:clamp(16px,5vw,72px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--night);color:var(--cream);font:17px/1.55 var(--sans);overflow-x:hidden}
 a{color:inherit}
@@ -48,6 +48,7 @@ h1 em{font-style:normal;color:var(--caramel)}
 .tile .go,.crown .go{margin-top:auto;font:500 13px var(--mono);letter-spacing:.04em;text-transform:uppercase}
 .tile.cv{background:var(--cv)}
 .tile.ct{background:var(--ct)}
+.tile.au{background:var(--au)}
 .paper{background:var(--paper);color:var(--ink);margin-top:clamp(90px,14vh,160px)}
 .apps{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;padding-top:clamp(72px,11vh,130px);padding-bottom:clamp(72px,11vh,130px)}
 .apps .eyebrow{display:block;color:var(--cocoa);margin-bottom:22px;text-transform:uppercase;letter-spacing:.1em}
@@ -96,6 +97,7 @@ li a{color:var(--cocoa);text-decoration:none;white-space:nowrap}
     <a href="https://cocoasuite.github.io/cocoacut/">Cut</a>
     <a href="https://cocoasuite.github.io/cocoacanvas/">Canvas</a>
     <a href="https://cocoasuite.github.io/cocoatune/">Tune</a>
+    <a href="https://cocoasuite.github.io/CocoaAuthor/">Author</a>
   </nav>
 </div>
 
@@ -103,7 +105,7 @@ li a{color:var(--cocoa);text-decoration:none;white-space:nowrap}
   <section class="wrap hero">
     <h1>Make it. Cut it. <em>Play it.</em></h1>
     <div class="lede">
-      <p>Design a poster, trim a video, play your own music. Each app runs in the browser, with the same look and no account. Everything stays on your computer: <b>no uploads, no sign-up.</b></p>
+      <p>Design a poster, trim a video, write a report, play your own music. Each app runs in the browser, with the same look and no account. Everything stays on your computer: <b>no uploads, no sign-up.</b></p>
       <div class="cta">
         <a class="btn pri" href="https://cocoasuite.github.io/cocoacut/">Open Cut</a>
         <a class="btn sec" href="#apps">See the apps</a>
@@ -161,6 +163,16 @@ li a{color:var(--cocoa);text-decoration:none;white-space:nowrap}
               <rect x="196" y="64" width="10" height="60" rx="2"/><rect x="212" y="36" width="10" height="88" rx="2"/><rect x="228" y="82" width="10" height="42" rx="2"/><rect x="244" y="58" width="10" height="66" rx="2"/>
             </g>
           </svg>
+        <a class="tile au" href="https://cocoasuite.github.io/CocoaAuthor/">
+          <span class="mono" style="opacity:.8">Writing</span>
+          <div class="disp">Cocoa Author</div>
+          <p>Write long documents with live pages, then publish them as PDF or Word files.</p>
+          <svg viewBox="0 0 260 130" width="100%" role="img" aria-hidden="true" style="display:block">
+            <rect x="40" y="8" width="84" height="116" rx="3" fill="#F6F1EB" opacity=".9"/>
+            <rect x="136" y="8" width="84" height="116" rx="3" fill="#F6F1EB" opacity=".55"/>
+            <g fill="#7d4f6c"><rect x="50" y="20" width="44" height="6" rx="1.5"/><rect x="50" y="34" width="64" height="3" rx="1.5" opacity=".6"/><rect x="50" y="42" width="60" height="3" rx="1.5" opacity=".6"/><rect x="50" y="50" width="64" height="3" rx="1.5" opacity=".6"/><rect x="50" y="58" width="38" height="3" rx="1.5" opacity=".6"/><rect x="50" y="70" width="64" height="30" rx="2" opacity=".3"/><rect x="50" y="106" width="52" height="3" rx="1.5" opacity=".6"/></g>
+            <g fill="#7d4f6c" opacity=".6"><rect x="146" y="20" width="64" height="3" rx="1.5"/><rect x="146" y="28" width="58" height="3" rx="1.5"/><rect x="146" y="36" width="64" height="3" rx="1.5"/><rect x="146" y="44" width="0" height="3" rx="1.5"><animate attributeName="width" values="0;64;64" keyTimes="0;.7;1" dur="4s" repeatCount="indefinite"/></rect></g>
+          </svg>
           <span class="go">Open landing →</span>
         </a>
       </div>
@@ -177,6 +189,7 @@ li a{color:var(--cocoa);text-decoration:none;white-space:nowrap}
         <li><span><span class="disp">Cocoa Cut</span><span class="d">A video editor in the browser. Say the change, see it, export a file.</span></span><a class="mono" href="https://cocoasuite.github.io/cocoacut/">→ Landing</a></li>
         <li><span><span class="disp">Cocoa Canvas</span><span class="d">A standalone design tool for interfaces, posters and layouts, built in HTML.</span></span><a class="mono" href="https://cocoasuite.github.io/cocoacanvas/">→ Landing</a></li>
         <li><span><span class="disp">Cocoa Tune</span><span class="d">A music player for local files, plus saved links from the web.</span></span><a class="mono" href="https://cocoasuite.github.io/cocoatune/">→ Landing</a></li>
+        <li><span><span class="disp">Cocoa Author</span><span class="d">A writing workspace for long documents, published as PDF or Word files.</span></span><a class="mono" href="https://cocoasuite.github.io/CocoaAuthor/">→ Landing</a></li>
       </ol>
     </div>
   </section>
@@ -190,6 +203,7 @@ li a{color:var(--cocoa);text-decoration:none;white-space:nowrap}
       <div class="item"><span class="tag" style="background:var(--ca)">CT</span><h3>Cut without the menus</h3><p>Trim, caption and export a video from one window, with no render queue.</p></div>
       <div class="item"><span class="tag" style="background:var(--cv)">CV</span><h3>Browser-first</h3><p>Open a tool in a tab. Nothing to install, and the same look everywhere.</p></div>
       <div class="item"><span class="tag" style="background:var(--ct)">TU</span><h3>Your music, your links</h3><p>Play local files, or save tracks from web links through the Tune backend.</p></div>
+      <div class="item"><span class="tag" style="background:var(--au)">AU</span><h3>Pages as you type</h3><p>Write with live page layout, then export a PDF or an editable Word file.</p></div>
       <div class="item"><span class="tag" style="background:var(--caramel)">EN</span><h3>English and Russian</h3><p>Every landing and app page reads in both languages.</p></div>
     </div>
   </section>
@@ -208,7 +222,7 @@ li a{color:var(--cocoa);text-decoration:none;white-space:nowrap}
       </div>
     </div>
     <footer class="foot mono">
-      <span>CocoaSuite · Cut · Canvas · Tune</span>
+      <span>CocoaSuite · Cut · Canvas · Tune · Author</span>
       <a href="https://github.com/CocoaSuite">github.com/CocoaSuite</a>
     </footer>
   </section>
