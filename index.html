@@ -113,8 +113,7 @@ h2{margin:0;font-size:22px;font-weight:600}
 </div></div>
 </div></div></div>
 <div class="fi">
-<span id="ft" class="tile" style="width:64px;height:64px;border-radius:16px;background:#693E2C"><img src="icons/cut.svg" alt=""></span>
-<span id="fc" class="cat">Video</span>
+<img id="fg" src="icons/cut-logo.svg" alt="Cocoa Cut" style="height:44px;width:auto;align-self:flex-start">
 <h1 id="fl">Edit video by saying what you want.</h1>
 <p id="fd">Trim, caption and arrange clips on a timeline, then export a file.</p>
 <a id="fo" class="btn lg" href="https://cocoasuite.github.io/cocoacut/">Open Cocoa Cut</a>
@@ -151,9 +150,8 @@ function show(k) {
   const a = A[k];
   $$('.pv').forEach((e) => e.hidden = e.dataset.k !== k);
   $$('.card').forEach((e) => e.classList.toggle('on', e.dataset.k === k));
-  $('#ft').style.background = a.bg;
-  $('#ft img').src = 'icons/' + k + '.svg';
-  $('#fc').textContent = a.c;
+  $('#fg').src = 'icons/' + k + '-logo.svg';
+  $('#fg').alt = a.n;
   $('#fl').textContent = a.l;
   $('#fd').textContent = a.d;
   $('#fo').href = a.u;
