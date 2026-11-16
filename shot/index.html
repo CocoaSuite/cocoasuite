@@ -62,6 +62,11 @@ footer a{color:#8E8E93}
 .gone{animation:gone 5s ease-in-out infinite}
 @keyframes drag{0%,20%{transform:none;box-shadow:none}40%,70%{transform:translate(-6px,-4px) rotate(-2deg);box-shadow:0 10px 24px rgba(0,0,0,.45)}90%,100%{transform:none}}
 .drag{animation:drag 4s ease-in-out infinite}
+@keyframes type{0%{width:0}70%,100%{width:76%}}
+@keyframes blink{50%{opacity:0}}
+.ty{animation:type 4.5s steps(30) infinite}
+.cr{animation:blink 1s step-end infinite}
+.soon{flex-basis:100%}
 @keyframes ants{to{stroke-dashoffset:-14}}
 .ants{animation:ants .8s linear infinite}
 
