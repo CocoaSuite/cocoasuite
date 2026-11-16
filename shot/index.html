@@ -121,7 +121,6 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
 </main>
 <script>
 const REPO = "CocoaSuite/CocoaShot";
-const FALLBACK = {"assets": [{"browser_download_url": "https://github.com/CocoaSuite/CocoaShot/releases/download/v1.5.1/CocoaShot-1.5.1.AppImage", "name": "CocoaShot-1.5.1.AppImage", "size": 176801166}, {"browser_download_url": "https://github.com/CocoaSuite/CocoaShot/releases/download/v1.5.1/cocoashot-app-1.5.1.json.gz", "name": "cocoashot-app-1.5.1.json.gz", "size": 3271981}, {"browser_download_url": "https://github.com/CocoaSuite/CocoaShot/releases/download/v1.5.1/cocoashot-app.json", "name": "cocoashot-app.json", "size": 196}, {"browser_download_url": "https://github.com/CocoaSuite/CocoaShot/releases/download/v1.5.1/CocoaShot.Setup.1.5.1.exe", "name": "CocoaShot.Setup.1.5.1.exe", "size": 160702281}, {"browser_download_url": "https://github.com/CocoaSuite/CocoaShot/releases/download/v1.5.1/cocoashot_1.5.1_amd64.deb", "name": "cocoashot_1.5.1_amd64.deb", "size": 145995748}], "tag_name": "v1.5.1"};
 const OS = [
   {k: 'win', n: 'Windows', t: 'Installer (.exe)', i: '<path d="M4 5.5l7-1v7H4zM13 4.2l7-1.2v8.5h-7zM4 12.5h7v7l-7-1zM13 12.5h7V21l-7-1.2z"/>',
    main: /\.exe$/i, alt: [[/\.msi$/i, '.msi']]},
@@ -159,11 +158,15 @@ function toggle(open) {
 $('#dl').onclick = (e) => { e.stopPropagation(); toggle($('#dlm').hidden); };
 document.addEventListener('click', (e) => { if (!$('#dlm').hidden && !$('#dlm').contains(e.target)) toggle(false); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#dlm').hidden) { toggle(false); $('#dl').focus(); } });
-if (FALLBACK) build(FALLBACK);
+function offline() {
+  $('#dlm').innerHTML = '<a class="opt" role="menuitem" href="https://github.com/' + REPO + '/releases/latest"><span class="oi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M4 19h16"/></svg></span><span><b>Latest release</b><small>All downloads</small></span></a>';
+  $('#dl').disabled = false;
+  const s = $('#soon'); if (s) s.remove();
+}
 fetch('https://api.github.com/repos/' + REPO + '/releases/latest', {headers: {Accept: 'application/vnd.github+json'}})
-  .then((r) => r.ok ? r.json() : null)
+  .then((r) => r.status === 404 ? null : r.ok ? r.json() : Promise.reject())
   .then((rel) => { if (rel) build(rel); })
-  .catch(() => {});
+  .catch(offline);
 </script>
 </body>
 </html>

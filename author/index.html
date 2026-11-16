@@ -119,7 +119,6 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
 </main>
 <script>
 const REPO = "CocoaSuite/CocoaAuthor";
-const FALLBACK = {"assets": [{"browser_download_url": "https://github.com/CocoaSuite/CocoaAuthor/releases/download/v1.4.0/CocoaAuthor-1.4.0.AppImage", "name": "CocoaAuthor-1.4.0.AppImage", "size": 112898447}, {"browser_download_url": "https://github.com/CocoaSuite/CocoaAuthor/releases/download/v1.4.0/CocoaAuthor.Setup.1.4.0.exe", "name": "CocoaAuthor.Setup.1.4.0.exe", "size": 125922771}, {"browser_download_url": "https://github.com/CocoaSuite/CocoaAuthor/releases/download/v1.4.0/cocoaauthor_1.4.0_amd64.deb", "name": "cocoaauthor_1.4.0_amd64.deb", "size": 113462748}], "tag_name": "v1.4.0"};
 const OS = [
   {k: 'win', n: 'Windows', t: 'Installer (.exe)', i: '<path d="M4 5.5l7-1v7H4zM13 4.2l7-1.2v8.5h-7zM4 12.5h7v7l-7-1zM13 12.5h7V21l-7-1.2z"/>',
    main: /\.exe$/i, alt: [[/\.msi$/i, '.msi']]},
@@ -157,11 +156,15 @@ function toggle(open) {
 $('#dl').onclick = (e) => { e.stopPropagation(); toggle($('#dlm').hidden); };
 document.addEventListener('click', (e) => { if (!$('#dlm').hidden && !$('#dlm').contains(e.target)) toggle(false); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#dlm').hidden) { toggle(false); $('#dl').focus(); } });
-if (FALLBACK) build(FALLBACK);
+function offline() {
+  $('#dlm').innerHTML = '<a class="opt" role="menuitem" href="https://github.com/' + REPO + '/releases/latest"><span class="oi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M4 19h16"/></svg></span><span><b>Latest release</b><small>All downloads</small></span></a>';
+  $('#dl').disabled = false;
+  const s = $('#soon'); if (s) s.remove();
+}
 fetch('https://api.github.com/repos/' + REPO + '/releases/latest', {headers: {Accept: 'application/vnd.github+json'}})
-  .then((r) => r.ok ? r.json() : null)
+  .then((r) => r.status === 404 ? null : r.ok ? r.json() : Promise.reject())
   .then((rel) => { if (rel) build(rel); })
-  .catch(() => {});
+  .catch(offline);
 </script>
 </body>
 </html>
